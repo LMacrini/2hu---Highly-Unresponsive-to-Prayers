@@ -303,16 +303,21 @@ class App:
         pyxel.init(256, 256, "2hu ~ Highly Unresponsive to Prayers")
         pyxel.load("1.pyxres")
 
+        self.start()        
+
+        pyxel.run(self.update, self.draw)
+    
+    def start(self):
         self.player = Player()
         self.enemies = Enemies()
         self.bullets = Bullets()
         self.boss = None
         self.score: int = 0
-
-        pyxel.run(self.update, self.draw)
     
     def update(self):
         if self.player.death_frame == 40:
+            if pyxel.btnp(pyxel.KEY_Z) or pyxel.btnp(pyxel.KEY_SPACE) or pyxel.btnp(pyxel.KEY_RETURN):
+                self.start()
             return
         self.bullets.update()
         self.player.update(self.bullets)
