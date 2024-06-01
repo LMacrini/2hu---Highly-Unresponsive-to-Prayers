@@ -13,7 +13,7 @@ from random import randint, choice
 import pyxel
 
 
-type Tile = tuple[int, int]
+Tile = tuple[int, int]
 
 TRANSPARENCY: int = 5
 
