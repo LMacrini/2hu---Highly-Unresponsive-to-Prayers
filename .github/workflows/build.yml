@@ -60,7 +60,7 @@ jobs:
         if: matrix.os == 'ubuntu-latest'
         run: |
           mkdir ./web
-          mv ./SpaceWarp-Remake.html ./web/index.html
+          mv ./2hu---Highly-Unresponsive-to-Prayers.html ./web/index.html
 
       - name: Setup Website
         if: matrix.os == 'ubuntu-latest'
