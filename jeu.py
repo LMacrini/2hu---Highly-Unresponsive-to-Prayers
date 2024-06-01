@@ -288,7 +288,7 @@ class Enemies:
         
         self.enemies = new_enemies
         
-        if pyxel.frame_count % 90 == 0 and boss is None:
+        if pyxel.frame_count % 90 == 0:
             self.add_enemy()
         
         return score
