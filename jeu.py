@@ -20,7 +20,7 @@ TRANSPARENCY: int = 5
 ENEMIES: list[Tile] = [(x * 16, y * 16 + 8) for x in range(4) for y in range(2, 4)]
 BOSSES: list[Tile] = [(x * 16, 24) for x in range(4)]
 BOSS_BULLETS: list[Tile] = [(8 + 8*x, 88) for x in range(4)]
-POWERUPS: list[Tile] = [(8 + 8*x, 80) for x in range(5)] + [(56, 80)]
+POWERUPS: list[Tile] = [(8 + 8*x, 80) for x in range(7)]
 
 DEATH_ANIMATION: list[Tile] = [(x, 104) for x in range(0, 65, 16)] + [(0, 120), (16, 120)]
 BOSS_ANIMATION: list[Tile] = [(32, 120), (48, 120)] + [(x, 136) for x in range(0, 65, 16)]
