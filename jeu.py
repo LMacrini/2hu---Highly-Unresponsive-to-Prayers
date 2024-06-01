@@ -77,12 +77,12 @@ class Player:
     def __init__(self):
         self.x: int = 120
         self.y: int = 240
-        self.lives: int = 3
+        self.lives: int = 2
         self.iframes: int = 0
         self.death_frame: int = 0
 
     def update(self, bullets):
-        if self.lives < 1:
+        if self.lives < 0:
             self.death_frame += 1
             return
 
@@ -104,7 +104,7 @@ class Player:
     def draw(self):
         for n_life in range(self.lives):
             pyxel.blt(n_life*8, 0, 0, 0, 136, 16, 16, TRANSPARENCY)
-        if self.lives < 1:
+        if self.lives < 0:
             sprite_x, sprite_y = DEATH_ANIMATION[min(self.death_frame//4, 6)]
             pyxel.blt(self.x, self.y, 0, sprite_x, sprite_y, 16, 16, TRANSPARENCY)
             return
