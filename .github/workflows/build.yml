@@ -1,0 +1,81 @@
+name: Build 2hu
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions: write-all
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Linux Packages
+        if: matrix.os == 'ubuntu-latest'
+        run: sudo apt-get install git curl libsdl2-mixer-2.0-0 libsdl2-image-2.0-0 libsdl2-2.0-0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+          check-latest: true
+          cache: pip
+
+      - name: Install Python Packages
+        run: pip install -r requirements.txt
+
+      - name: Package App
+        run: pyxel package ./ ./jeu.py
+
+      - name: Build App
+        run: pyxel app2exe ./2hu---Highly-Unresponsive-to-Prayers.pyxapp
+
+      - name: Create Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.os }}
+          path: |
+            ./2hu---Highly-Unresponsive-to-Prayers*
+            !./2hu---Highly-Unresponsive-to-Prayers.pyxapp
+
+      - name: Build Website
+        if: matrix.os == 'ubuntu-latest'
+        run: pyxel app2html ./2hu---Highly-Unresponsive-to-Prayers.pyxapp
+
+      - name: Move File
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          mkdir ./web
+          mv ./SpaceWarp-Remake.html ./web/index.html
+
+      - name: Setup Website
+        if: matrix.os == 'ubuntu-latest'
+        uses: actions/configure-pages@v5
+
+      - name: Create Website
+        if: matrix.os == 'ubuntu-latest'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          name: web
+          path: ./web/
+
+      - name: Deploy Website
+        if: matrix.os == 'ubuntu-latest'
+        id: deployment
+        uses: actions/deploy-pages@v4
+        with:
+          artifact_name: web
