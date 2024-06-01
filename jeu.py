@@ -134,7 +134,7 @@ class Enemy:
             self.dx, self.dy = randint(1, 2), randint(1, 2)
         
     
-    def update(self, player, bullets) -> int:
+    def update(self, player, bullets):
         if self.x > 240 or self.x < 0:
             self.dx = -self.dx
         
