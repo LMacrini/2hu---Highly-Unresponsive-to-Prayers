@@ -300,7 +300,7 @@ class Enemies:
 
 class App:
     def __init__(self):
-        pyxel.init(256, 256, "2hu ~ Highly Unresponsive to Prayers")
+        pyxel.init(256, 256, title="2hu ~ Highly Unresponsive to Prayers")
         pyxel.load("1.pyxres")
 
         self.start()        
