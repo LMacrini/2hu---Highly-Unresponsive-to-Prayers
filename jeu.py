@@ -311,7 +311,7 @@ class App:
         self.player = Player()
         self.enemies = Enemies()
         self.bullets = Bullets()
-        self.boss = None
+        self.boss: None | Boss = None
         self.score: int = 0
     
     def update(self):
