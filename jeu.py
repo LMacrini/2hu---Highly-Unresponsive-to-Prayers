@@ -77,7 +77,7 @@ class Player:
     def __init__(self):
         self.x: int = 120
         self.y: int = 240
-        self.lives: int = 2
+        self.lives: int = 3
         self.iframes: int = 0
         self.death_frame: int = 0
 
@@ -259,7 +259,7 @@ class Boss:
         for bullet in self.bullets:
             bullet.draw()
         
-        if self.lives < 0:
+        if self.lives < 1:
             return
 
         if self.hit == True:
