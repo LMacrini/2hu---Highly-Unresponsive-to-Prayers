@@ -26,16 +26,16 @@ DEATH_ANIMATION: list[Tile] = [(x, 104) for x in range(0, 65, 16)] + [(0, 120), 
 BOSS_ANIMATION: list[Tile] = [(32, 120), (48, 120)] + [(x, 136) for x in range(0, 65, 16)]
 
 # Movement Functions
-def linear_movement(x, y, dx, dy, *args) -> tuple[int, int]:
+def linear_movement(x, y, dx, dy, *args) -> Tile:
     return x + dx, y + dy
 
-def sinus_side_movement(x, y, dx, dy, start, *args) -> tuple[int, int]:
+def sinus_side_movement(x, y, dx, dy, start, *args) -> Tile:
     return x + dx, int(pyxel.sin((x + dx) * 2) * 64) + start
     
-def sinus_down_movement(x, y, dx, dy, start, *args) -> tuple[int, int]:
+def sinus_down_movement(x, y, dx, dy, start, *args) -> Tile:
     return int(pyxel.sin((y + dy) * 2) * 64) + start, y + dy
 
-def boss_sinus_movement(x, dx) -> tuple[int, int]:
+def boss_sinus_movement(x, dx) -> Tile:
     y = int(pyxel.sin((x + dx)) * 64)
     if y < 32:
         y = - (y - 32) + 32
